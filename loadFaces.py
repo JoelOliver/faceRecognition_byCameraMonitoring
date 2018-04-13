@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 def load_picture_captured():
     filename = "frame"
     D = 100
-    img_file = cv2.imread('frame_sample.png', 0)
+    img_file = cv2.imread('sample_to_rank.png', 0)
     img = cv2.resize(img_file, (D, D))
     img = np.reshape(img, (D * D))
     return img
@@ -25,6 +25,7 @@ def load_faces(Filename):
 
     # String of filename to concatenated
     filename_str = '{}'.format(Filename)
+    filename_str = '{}'.format(Filename)
     str_1 = 'subject0'
     str_2 = 'subject'
     str_3 = ['.centerlight', '.glasses', '.happy', '.leftlight', '.noglasses',
@@ -36,13 +37,15 @@ def load_faces(Filename):
     D = 100
 
     for i in range(N):  # Indice para os individuos
-
+        print('Carregando imagem_{}'.format(i))
         for j in range(Ni):   # Indice para expressoes
 
             if i < 9:
                 img_file = cv2.imread('{}/{}{}{}{}'.format(
                     filename_str, str_1, i + 1, str_3[j], str_4),0)
+                img_file = cv2.imread('{}/{}{}{}{}'.format(filename_str, str_1, i + 1, str_3[j],str_4),0)
                 # print('{} -> {}'.format((i+1), (j+1)))
+                print(np.size(img_file))
                 img = cv2.resize(img_file, (D, D))
                 img = np.reshape(img, (D * D))
                 X.append(img)
