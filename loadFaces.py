@@ -2,10 +2,10 @@ import numpy as np
 import cv2
 from sklearn.model_selection import train_test_split
 
-def load_pictureCaptured():
+def load_picture_captured():
     filename = "frame"
     D = 100
-    img_file = cv2.imread('frame.pgm', 0)
+    img_file = cv2.imread('frame_sample.png', 0)
     img = cv2.resize(img_file, (D, D))
     img = np.reshape(img, (D * D))
     return img
