@@ -43,6 +43,8 @@ def load_faces(Filename):
                 img_file = cv2.imread('{}/{}{}{}{}'.format(
                     filename_str, str_1, i + 1, str_3[j], str_4),0)
                 # print('{} -> {}'.format((i+1), (j+1)))
+
+                print(np.size(img_file))
                 img = cv2.resize(img_file, (D, D))
                 img = np.reshape(img, (D * D))
                 X.append(img)
