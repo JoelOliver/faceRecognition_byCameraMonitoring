@@ -7,7 +7,7 @@ from sklearn.preprocessing import normalize
 #from imageCapture import sample_capture
 
 #inicializations
-dataset_faces = load_faces('centered_faces [test]')
+dataset_faces = load_faces('centered_faces')
 X, y = [dataset_faces[0], dataset_faces[1]]
 
 X = normalize(X)

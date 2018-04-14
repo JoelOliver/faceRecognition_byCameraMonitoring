@@ -3,7 +3,6 @@ import cv2
 from sklearn.model_selection import train_test_split
 
 def load_picture_captured():
-    filename = "frame"
     D = 100
     img_file = cv2.imread('sample_to_rank.png', 0)
     img = cv2.resize(img_file, (D, D))
@@ -12,10 +11,10 @@ def load_picture_captured():
 
 def load_faces(Filename):
     # Number of Persons in DataBase
-    N = 16
+    N = 4
 
     # Number of image faces for each Person in Database
-    Ni = 11
+    Ni = 10
 
     # Data of images in vector format
     X = []
@@ -25,13 +24,13 @@ def load_faces(Filename):
 
     # String of filename to concatenated
     filename_str = '{}'.format(Filename)
-    filename_str = '{}'.format(Filename)
-    str_1 = 'subject0'
-    str_2 = 'subject'
+    str_1 = 'Subject0'
+    #str_2 = 'subject'
     str_3 = ['.centerlight', '.glasses', '.happy', '.leftlight', '.noglasses',
              '.normal', '.rightlight', '.sad', '.sleepy', '.surprised', '.wink']
-    str_4 = '.pgm'
+    str_4 = '.png'
     str_5 = '.jpg'
+    str_6 = '-type '
 
     # Dimensionality of Vector Image
     D = 100
@@ -41,9 +40,10 @@ def load_faces(Filename):
         for j in range(Ni):   # Indice para expressoes
 
             if i < 9:
-                img_file = cv2.imread('{}/{}{}{}{}'.format(
-                    filename_str, str_1, i + 1, str_3[j], str_4),0)
-                img_file = cv2.imread('{}/{}{}{}{}'.format(filename_str, str_1, i + 1, str_3[j],str_4),0)
+                str_ = '{}/{}{}{}{}{}'.format(filename_str, str_1, i + 1, str_6,j+1, str_4)
+                print(str_)
+                img_file = cv2.imread(str_,0)
+                img_file = cv2.imread(str_,0)
                 # print('{} -> {}'.format((i+1), (j+1)))
                 print(np.size(img_file))
                 img = cv2.resize(img_file, (D, D))
@@ -65,5 +65,5 @@ def load_faces(Filename):
                 X.append(img)
                 y.append(i + 1)
 
-
+    print(y)
     return [X, y]

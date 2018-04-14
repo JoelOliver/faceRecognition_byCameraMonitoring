@@ -57,7 +57,7 @@ def samples_capture_to_dataBase():
 			break
 		elif k%256 == 32:
 			#SPACE pressed
-			img_name = 'samples_faces_dataset/Subject03-type {}.png'.format(npictures+1)
+			img_name = 'samples_faces_dataset/Subject04-type {}.png'.format(npictures+1)
 			cv2.imwrite(img_name,cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY))
 			print('{} salvo'.format(img_name))
 			npictures+=1
@@ -66,4 +66,4 @@ def samples_capture_to_dataBase():
 
 	cv2.destroyAllWindows()
 
-#samples_capture_to_dataBase()
+samples_capture_to_dataBase()
