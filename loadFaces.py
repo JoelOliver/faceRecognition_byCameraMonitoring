@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 from sklearn.model_selection import train_test_split
+import pandas as pd
 
 def load_picture_captured():
     D = 100
@@ -9,9 +10,9 @@ def load_picture_captured():
     img = np.reshape(img, (D * D))
     return img
 
-def load_faces(Filename):
+def vectorize_data_faces(Filename,last_index_subject):
     # Number of Persons in DataBase
-    N = 4
+    N = last_index_subject + 1
 
     # Number of image faces for each Person in Database
     Ni = 10
@@ -24,11 +25,9 @@ def load_faces(Filename):
 
     # String of filename to concatenated
     filename_str = '{}'.format(Filename)
-    str_1 = ['Subject0','subject0','subject']
-    str_2 = ['.centerlight', '.glasses', '.happy', '.leftlight', '.noglasses',
-             '.normal', '.rightlight', '.sad', '.sleepy', '.surprised', '.wink']
+    str_1 = ['Subject_','subject0','subject']
     str_3 = ['.pgm','.png','.jpg']
-    str_4 = '-type '
+    str_4 = '_type_'
 
     # Dimensionality of Vector Image
     D = 100
@@ -62,3 +61,32 @@ def load_faces(Filename):
 
     
     return [X, y]
+
+def save_vectorized_load_faces_in_csv_file():
+    dataset_faces = vectorize_data_faces('samples_faces_dataset')
+    X, y = [dataset_faces[0], dataset_faces[1]]
+    
+    X_df = pd.DataFrame(X)
+    X_df.to_csv('X.csv', index=False, header=False)
+
+    #y_df = pd.DataFrame(y)  
+    #y_df.to_csv('y.csv', index=False, header=False)
+
+    print("Imagens vetorizadas e salvas em arquivos do tipo .csv")
+
+#save_load_faces_in_csv_file()
+#df = pd.read_csv('X.csv')
+#print(len(df.values.tolist()[0]))
+
+def return_of_image_vectors():
+    X = pd.read_csv('X.csv').values.tolist()
+    y = pd.read_csv('y.csv').values.tolist()
+
+    return [X,y]
+
+def return_last_index_subject():
+    last_index_subject = pd.read_csv('y.csv').values.tolist()[-1][0]
+
+    return last_index_subject
+
+#print(return_last_index_subject())    

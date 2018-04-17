@@ -1,13 +1,13 @@
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neighbors.nearest_centroid import NearestCentroid
 from sklearn.model_selection import train_test_split
-from loadFaces import load_faces,load_picture_captured
+from loadFaces import vectorize_data_faces,load_picture_captured,return_of_image_vectors
 import numpy as np
 from sklearn.preprocessing import normalize
 from imageCapture import sample_capture_to_rank
 
 #inicializations
-dataset_faces = load_faces('samples_faces_dataset')
+dataset_faces = return_of_image_vectors()
 X, y = [dataset_faces[0], dataset_faces[1]]
 
 X = normalize(X)
@@ -96,7 +96,7 @@ def knearest_rank_a_sample():
 	print("The system predicts :{}".format(predict))
 
 #Testar função -> knearest_rank_a_sample()
-knearest_rank_a_sample()
+#knearest_rank_a_sample()
 
 def nearest_centroid_rank_a_sample():
 	#take a picture for classification
@@ -114,4 +114,4 @@ def nearest_centroid_rank_a_sample():
 	print("The system predicts :{}".format(predict))
 
 #Testar função -> nearest_centroid_rank_a_sample()
-nearest_centroid_rank_a_sample()
+#nearest_centroid_rank_a_sample()

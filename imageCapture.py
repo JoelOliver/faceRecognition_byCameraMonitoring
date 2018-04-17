@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+from loadFaces import vectorize_data_faces,return_last_index_subject,save_vectorized_load_faces_in_csv_file
 
 # Função para capturar apenas uma imagem, para que o programa classifique
 # a partir da escolha do classificador-algorítmo e Banco de Dados
@@ -36,7 +37,7 @@ def sample_capture_to_rank():
 #Testar função -> sample_capture_to_rank()
 #sample_capture_to_rank()
 
-def samples_capture_to_dataBase():
+def samples_capture_to_dataBase(subject_number):
 	cam=cv2.VideoCapture(0)
 	cv2.namedWindow("image_capture_for_database",cv2.WINDOW_NORMAL)
 	cv2.resizeWindow("image_capture_for_database",800,800)
@@ -58,7 +59,7 @@ def samples_capture_to_dataBase():
 			break
 		elif k%256 == 32:
 			#SPACE pressed
-			img_name = 'samples_faces_dataset/Subject04-type {}.png'.format(npictures+1)
+			img_name = 'samples_faces_dataset/Subject_{}_type_{}.png'.format(subject_number,npictures+1)
 			cv2.imwrite(img_name,cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY))
 			print('{} salvo'.format(img_name))
 			npictures+=1
@@ -66,6 +67,8 @@ def samples_capture_to_dataBase():
 	cam.release()
 
 	cv2.destroyAllWindows()
+	vectorize_data_faces('samples_faces_dataset', return_last_index_subject())
+	save_vectorized_load_faces_in_csv_file()
 
-#Testar função -> samples_capture_to_dataBase()
-#samples_capture_to_dataBase()
+#Usar função -> samples_capture_to_dataBase()
+#samples_capture_to_dataBase(return_last_index_subject())
