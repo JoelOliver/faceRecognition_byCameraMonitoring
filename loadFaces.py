@@ -24,46 +24,41 @@ def load_faces(Filename):
 
     # String of filename to concatenated
     filename_str = '{}'.format(Filename)
-    str_1 = 'Subject0'
-    #str_2 = 'subject'
-    str_3 = ['.centerlight', '.glasses', '.happy', '.leftlight', '.noglasses',
+    str_1 = ['Subject0','subject0','subject']
+    str_2 = ['.centerlight', '.glasses', '.happy', '.leftlight', '.noglasses',
              '.normal', '.rightlight', '.sad', '.sleepy', '.surprised', '.wink']
-    str_4 = '.png'
-    str_5 = '.jpg'
-    str_6 = '-type '
+    str_3 = ['.pgm','.png','.jpg']
+    str_4 = '-type '
 
     # Dimensionality of Vector Image
     D = 100
 
     for i in range(N):  # Indice para os individuos
-        print('Carregando imagem_{}'.format(i))
+        
         for j in range(Ni):   # Indice para expressoes
 
             if i < 9:
-                str_ = '{}/{}{}{}{}{}'.format(filename_str, str_1, i + 1, str_6,j+1, str_4)
-                print(str_)
+                str_ = '{}/{}{}{}{}{}'.format(filename_str, str_1[0], i + 1, str_4, j+1, str_3[1])
+                #print(str_)
                 img_file = cv2.imread(str_,0)
-                img_file = cv2.imread(str_,0)
-                # print('{} -> {}'.format((i+1), (j+1)))
-                print(np.size(img_file))
                 img = cv2.resize(img_file, (D, D))
                 img = np.reshape(img, (D * D))
                 X.append(img)
                 y.append(i + 1)
-            elif i >= 9 and i < 15:
-                img_file = cv2.imread(
-                    '{}/{}{}{}{}'.format(filename_str, str_2, i + 1, str_3[j], str_4), 0)
-                img = cv2.resize(img_file, (D, D))
-                img = np.reshape(img, (D * D))
-                X.append(img)
-                y.append(i + 1)
-            else:
-                img_file = cv2.imread('{}/{}{}{}{}'.format(
-                    filename_str, str_2, i + 1, str_3[j], str_5), 0)
-                img = cv2.resize(img_file, (D, D))
-                img = np.reshape(img, (D * D))
-                X.append(img)
-                y.append(i + 1)
+            #elif i >= 9 and i < 15:
+            #    img_file = cv2.imread(
+            #        '{}/{}{}{}{}'.format(filename_str, str_2, i + 1, str_3[j], str_4), 0)
+            #    img = cv2.resize(img_file, (D, D))
+            #    img = np.reshape(img, (D * D))
+            #    X.append(img)
+            #    y.append(i + 1)
+            #else:
+            #    img_file = cv2.imread('{}/{}{}{}{}'.format(
+            #        filename_str, str_2, i + 1, str_3[j], str_5), 0)
+            #    img = cv2.resize(img_file, (D, D))
+            #    img = np.reshape(img, (D * D))
+            #    X.append(img)
+            #    y.append(i + 1)
 
-    print(y)
+    
     return [X, y]

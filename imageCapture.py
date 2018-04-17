@@ -33,6 +33,7 @@ def sample_capture_to_rank():
 
 	cv2.destroyAllWindows()
 
+#Testar função -> sample_capture_to_rank()
 #sample_capture_to_rank()
 
 def samples_capture_to_dataBase():
@@ -66,4 +67,5 @@ def samples_capture_to_dataBase():
 
 	cv2.destroyAllWindows()
 
-samples_capture_to_dataBase()
+#Testar função -> samples_capture_to_dataBase()
+#samples_capture_to_dataBase()
