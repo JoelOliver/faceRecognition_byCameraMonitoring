@@ -45,6 +45,7 @@ def samples_capture_to_dataBase(subject_number):
 	print("Tirar cerca de 10 fotos para que componham o Banco de Dados,")
 	print("Basta utilizar o SPACE ...")
 
+	subject_number+=1
 	npictures=0
 	while npictures <10:
 		ret,frame = cam.read()
@@ -67,8 +68,8 @@ def samples_capture_to_dataBase(subject_number):
 	cam.release()
 
 	cv2.destroyAllWindows()
-	vectorize_data_faces('samples_faces_dataset', return_last_index_subject())
-	save_vectorized_load_faces_in_csv_file()
+	v=vectorize_data_faces('samples_faces_dataset', return_last_index_subject())
+	save_vectorized_load_faces_in_csv_file(v)
 
 #Usar função -> samples_capture_to_dataBase()
 #samples_capture_to_dataBase(return_last_index_subject())

@@ -62,15 +62,15 @@ def vectorize_data_faces(Filename,last_index_subject):
     
     return [X, y]
 
-def save_vectorized_load_faces_in_csv_file():
-    dataset_faces = vectorize_data_faces('samples_faces_dataset')
-    X, y = [dataset_faces[0], dataset_faces[1]]
-    
+def save_vectorized_load_faces_in_csv_file(v):
+    #dataset_faces = vectorize_data_faces('samples_faces_dataset')
+    #X, y = [dataset_faces[0], dataset_faces[1]]
+    X, y = [v[0],v[1]]
     X_df = pd.DataFrame(X)
     X_df.to_csv('X.csv', index=False, header=False)
 
-    #y_df = pd.DataFrame(y)  
-    #y_df.to_csv('y.csv', index=False, header=False)
+    y_df = pd.DataFrame(y)  
+    y_df.to_csv('y.csv', index=False, header=False)
 
     print("Imagens vetorizadas e salvas em arquivos do tipo .csv")
 

@@ -8,7 +8,13 @@ from imageCapture import sample_capture_to_rank
 
 #inicializations
 dataset_faces = return_of_image_vectors()
-X, y = [dataset_faces[0], dataset_faces[1]]
+#print(dataset_faces[0])
+#print(dataset_faces[1])
+X, y = [dataset_faces[0], np.asarray(dataset_faces[1]).transpose()[0]]
+#y = np.asarray(y)
+
+# you can get the row from transposed matrix - it will be a column:
+#print(y.transpose()[0])
 
 X = normalize(X)
 
@@ -82,7 +88,7 @@ def centroid_training():
 
 def knearest_rank_a_sample():
 	#take a picture for classification
-	#sample_capture_to_rank()
+	sample_capture_to_rank()
 	
 	#read the image that had captured
 	img = load_picture_captured()
@@ -100,7 +106,7 @@ def knearest_rank_a_sample():
 
 def nearest_centroid_rank_a_sample():
 	#take a picture for classification
-	#sample_capture_to_rank()
+	sample_capture_to_rank()
 	
 	#read the image that had captured
 	img = load_picture_captured()
@@ -114,4 +120,4 @@ def nearest_centroid_rank_a_sample():
 	print("The system predicts :{}".format(predict))
 
 #Testar função -> nearest_centroid_rank_a_sample()
-#nearest_centroid_rank_a_sample()
+nearest_centroid_rank_a_sample()
