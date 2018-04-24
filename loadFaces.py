@@ -37,7 +37,6 @@ def vectorize_data_faces(Filename,last_index_subject):
         for j in range(Ni):   # Indice para expressoes
 
             if i < 9:
-<<<<<<< HEAD
                 img_file = cv2.imread('{}/{}{}{}{}'.format(
                     filename_str, str_1, i + 1, str_3[j], str_4),0)
                 # print('{} -> {}'.format((i+1), (j+1)))
@@ -50,11 +49,9 @@ def vectorize_data_faces(Filename,last_index_subject):
             elif i >= 9 and i < 15:
                 img_file = cv2.imread(
                     '{}/{}{}{}{}'.format(filename_str, str_2, i + 1, str_3[j], str_4), 0)
-=======
                 str_ = '{}/{}{}{}{}{}'.format(filename_str, str_1[0], i + 1, str_4, j+1, str_3[1])
                 #print(str_)
                 img_file = cv2.imread(str_,0)
->>>>>>> some_updates
                 img = cv2.resize(img_file, (D, D))
                 img = np.reshape(img, (D * D))
                 X.append(img)
