@@ -12,7 +12,7 @@ def load_picture_captured():
 
 def vectorize_data_faces(Filename,last_index_subject):
     # Number of Persons in DataBase
-    N = last_index_subject + 1
+    N = last_index_subject + 1 
 
     # Number of image faces for each Person in Database
     Ni = 10
@@ -37,41 +37,15 @@ def vectorize_data_faces(Filename,last_index_subject):
         for j in range(Ni):   # Indice para expressoes
 
             if i < 9:
-                img_file = cv2.imread('{}/{}{}{}{}'.format(
-                    filename_str, str_1, i + 1, str_3[j], str_4),0)
-                # print('{} -> {}'.format((i+1), (j+1)))
+                img_file = cv2.imread('{}/{}{}{}{}{}'.format(filename_str, str_1[0], i + 1, str_4, j+1,str_3[1]),0)
+                #print('{}'.format(img_file))
 
-                print(np.size(img_file))
+                #print(np.size(img_file))
                 img = cv2.resize(img_file, (D, D))
                 img = np.reshape(img, (D * D))
                 X.append(img)
                 y.append(i + 1)
-            elif i >= 9 and i < 15:
-                img_file = cv2.imread(
-                    '{}/{}{}{}{}'.format(filename_str, str_2, i + 1, str_3[j], str_4), 0)
-                str_ = '{}/{}{}{}{}{}'.format(filename_str, str_1[0], i + 1, str_4, j+1, str_3[1])
-                #print(str_)
-                img_file = cv2.imread(str_,0)
-                img = cv2.resize(img_file, (D, D))
-                img = np.reshape(img, (D * D))
-                X.append(img)
-                y.append(i + 1)
-            #elif i >= 9 and i < 15:
-            #    img_file = cv2.imread(
-            #        '{}/{}{}{}{}'.format(filename_str, str_2, i + 1, str_3[j], str_4), 0)
-            #    img = cv2.resize(img_file, (D, D))
-            #    img = np.reshape(img, (D * D))
-            #    X.append(img)
-            #    y.append(i + 1)
-            #else:
-            #    img_file = cv2.imread('{}/{}{}{}{}'.format(
-            #        filename_str, str_2, i + 1, str_3[j], str_5), 0)
-            #    img = cv2.resize(img_file, (D, D))
-            #    img = np.reshape(img, (D * D))
-            #    X.append(img)
-            #    y.append(i + 1)
-
-    
+            
     return [X, y]
 
 def save_vectorized_load_faces_in_csv_file(v):

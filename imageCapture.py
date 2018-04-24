@@ -73,3 +73,5 @@ def samples_capture_to_dataBase(subject_number):
 
 #Usar função -> samples_capture_to_dataBase()
 #samples_capture_to_dataBase(return_last_index_subject())
+#v=vectorize_data_faces('samples_faces_dataset', return_last_index_subject())
+#save_vectorized_load_faces_in_csv_file(v)

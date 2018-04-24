@@ -23,7 +23,7 @@ neighKNeigh = KNeighborsClassifier(n_neighbors=3)
 neighCentroid = NearestCentroid()
 
 def knearest_neighborhood_training():
-	print("Rodadas de treinamento - Classificador KNearest Neighborhood")
+	print("\n>>>>> Rodadas de treinamento - Classificador KNearest Neighborhood <<<<<")
 	Nr = 0
 	hitsVector = []
 
@@ -49,13 +49,13 @@ def knearest_neighborhood_training():
 	print("Mediana de acertos :{} %".format(np.median(np.array(hitsVector))))
 	print("Media de acertos :{} %".format(np.mean(np.array(hitsVector))))
 	print("Minimo acerto :{} %".format(np.min(np.array(hitsVector))))
-	print("Maximo acerto :{} %".format(np.max(np.array(hitsVector))))
+	print("Maximo acerto :{} % \n".format(np.max(np.array(hitsVector))))
 
 #Testar função -> nearest_knearest_neighborhood_training() 
 #knearest_neighborhood_training() 
 
 def centroid_training():
-	print("Rodadas de treinamento - Classificador Nearest Centroid")
+	print(">>>>> Rodadas de treinamento - Classificador Nearest Centroid <<<<<")
 	Nr = 0
 	hitsVector = []
 
@@ -81,7 +81,7 @@ def centroid_training():
 	print("Mediana de acertos :{} %".format(np.median(np.array(hitsVector))))
 	print("Media de acertos :{} %".format(np.mean(np.array(hitsVector))))
 	print("Minimo acerto :{} %".format(np.min(np.array(hitsVector))))
-	print("Maximo acerto :{} %".format(np.max(np.array(hitsVector))))
+	print("Maximo acerto :{} % \n".format(np.max(np.array(hitsVector))))
 
 #Testar função -> nearest_centroid_training()
 #centroid_training()
@@ -120,4 +120,4 @@ def nearest_centroid_rank_a_sample():
 	print("The system predicts :{}".format(predict))
 
 #Testar função -> nearest_centroid_rank_a_sample()
-nearest_centroid_rank_a_sample()
+#nearest_centroid_rank_a_sample()
