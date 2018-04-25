@@ -10,7 +10,8 @@ from imageCapture import sample_capture_to_rank
 dataset_faces = return_of_image_vectors()
 #print(dataset_faces[0])
 #print(dataset_faces[1])
-X, y = [dataset_faces[0], np.asarray(dataset_faces[1]).transpose()[0]]
+X, y = [dataset_faces[0],dataset_faces[1]]
+print(y)
 #y = np.asarray(y)
 
 # you can get the row from transposed matrix - it will be a column:

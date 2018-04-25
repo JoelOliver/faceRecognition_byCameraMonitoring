@@ -66,7 +66,7 @@ def save_vectorized_load_faces_in_csv_file(v):
 
 def return_of_image_vectors():
     X = pd.read_csv('X.csv').values.tolist()
-    y = pd.read_csv('y.csv').values.tolist()
+    y = np.asarray(pd.read_csv('y.csv').values.tolist()).transpose()[0] #vetorizando a lista y
 
     return [X,y]
 
@@ -75,4 +75,4 @@ def return_last_index_subject():
 
     return last_index_subject
 
-#print(return_last_index_subject())    
+#print(return_last_index_subject())
