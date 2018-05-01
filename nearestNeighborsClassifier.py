@@ -1,22 +1,22 @@
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neighbors.nearest_centroid import NearestCentroid
 from sklearn.model_selection import train_test_split
-from loadFaces import vectorize_data_faces,load_picture_captured,return_of_image_vectors
+from loadFaces import vectorize_data_faces,load_picture_captured
+from saveReturnValuesCSV import return_of_image_and_rotule_vectors,return_subject_name
 import numpy as np
 from sklearn.preprocessing import normalize
 from imageCapture import sample_capture_to_rank
+import subprocess
+
+#saudações
+#subprocess.call(["say","Olá, seja bem vindo ao sistema de reconhecimento facial do Centauro"])
+#subprocess.call(["say","Minha missão, pelo menos por enquanto, é tentar reconhecer você"])
 
 #inicializations
-dataset_faces = return_of_image_vectors()
-#print(dataset_faces[0])
-#print(dataset_faces[1])
+dataset_faces = return_of_image_and_rotule_vectors()
 X, y = [dataset_faces[0],dataset_faces[1]]
-print(y)
-#y = np.asarray(y)
 
-# you can get the row from transposed matrix - it will be a column:
-#print(y.transpose()[0])
-
+#Normalization of X Matrix of image_vectors
 X = normalize(X)
 
 # para mudar valores dos parâmetros, verificar documentação do scikit-learn
@@ -56,7 +56,7 @@ def knearest_neighborhood_training():
 #knearest_neighborhood_training() 
 
 def centroid_training():
-	print(">>>>> Rodadas de treinamento - Classificador Nearest Centroid <<<<<")
+	print("\n>>>>> Rodadas de treinamento - Classificador Nearest Centroid <<<<<")
 	Nr = 0
 	hitsVector = []
 
@@ -100,7 +100,9 @@ def knearest_rank_a_sample():
 
 	neighKNeigh.fit(X,y)
 	predict = neighKNeigh.predict(img)
-	print("The system predicts :{}".format(predict))
+	
+	#subprocess.call(["say","Olá {}, espero ter acertado.".format(return_subject_name(predict))])
+	print("\nO Sistema prediz que você é : {}-{}\n".format(predict,return_subject_name(predict)))
 
 #Testar função -> knearest_rank_a_sample()
 #knearest_rank_a_sample()
@@ -118,7 +120,8 @@ def nearest_centroid_rank_a_sample():
 
 	neighCentroid.fit(X,y)
 	predict = neighCentroid.predict(img)
-	print("The system predicts :{}".format(predict))
+	#subprocess.call(["say","Olá {}, espero ter acertado.".format(return_subject_name(predict)[0])])
+	print("\nO Sistema prediz que você é : {}-{}\n".format(predict,return_subject_name(predict)))
 
 #Testar função -> nearest_centroid_rank_a_sample()
 #nearest_centroid_rank_a_sample()

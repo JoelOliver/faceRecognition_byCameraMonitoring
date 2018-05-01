@@ -2,17 +2,48 @@ import numpy as np
 import cv2
 from sklearn.model_selection import train_test_split
 import pandas as pd
+from detectFaces import detect_faces
+
+# Inicializations
+D = 100 # Dimension to reshape images
 
 def load_picture_captured():
-    D = 100
     img_file = cv2.imread('sample_to_rank.png', 0)
     img = cv2.resize(img_file, (D, D))
     img = np.reshape(img, (D * D))
     return img
 
-def vectorize_data_faces(Filename,last_index_subject):
+def vectorize_data_faces_cutting(Filename,numberOfPersons):
     # Number of Persons in DataBase
-    N = last_index_subject + 1 
+    N = numberOfPersons 
+
+    # Number of image faces for each Person in Database
+    Ni = 10
+        # String of filename to concatenated
+    filename_str = '{}'.format(Filename)
+    str_1 = ['Subject_','subject0','subject']
+    str_3 = ['.pgm','.png','.jpg']
+    str_4 = '_type_'
+
+    haar_face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
+
+    #call our function to detect faces 
+    
+    for i in range(N):  # Indice para os individuos
+        
+        for j in range(Ni):   # Indice para expressoes
+
+            if i < 9:
+                str_ = '{}/{}{}{}{}{}'.format(filename_str, str_1[0], i + 1, str_4, j + 1, str_3[1])
+                img_file = cv2.imread(str_,0)
+                faces_detected_img = detect_faces(haar_face_cascade, img_file)  
+                cv2.imwrite(str_,faces_detected_img)
+                #print(str_)
+
+
+def vectorize_data_faces(Filename,numberOfPersons):
+    # Number of Persons in DataBase
+    N = numberOfPersons 
 
     # Number of image faces for each Person in Database
     Ni = 10
@@ -29,17 +60,13 @@ def vectorize_data_faces(Filename,last_index_subject):
     str_3 = ['.pgm','.png','.jpg']
     str_4 = '_type_'
 
-    # Dimensionality of Vector Image
-    D = 100
-
     for i in range(N):  # Indice para os individuos
         
         for j in range(Ni):   # Indice para expressoes
 
             if i < 9:
-                img_file = cv2.imread('{}/{}{}{}{}{}'.format(filename_str, str_1[0], i + 1, str_4, j+1,str_3[1]),0)
+                img_file = cv2.imread('{}/{}{}{}{}{}'.format(filename_str, str_1[0], i + 1, str_4, j + 1, str_3[1]),0)
                 #print('{}'.format(img_file))
-
                 #print(np.size(img_file))
                 img = cv2.resize(img_file, (D, D))
                 img = np.reshape(img, (D * D))
@@ -47,32 +74,3 @@ def vectorize_data_faces(Filename,last_index_subject):
                 y.append(i + 1)
             
     return [X, y]
-
-def save_vectorized_load_faces_in_csv_file(v):
-    #dataset_faces = vectorize_data_faces('samples_faces_dataset')
-    #X, y = [dataset_faces[0], dataset_faces[1]]
-    X, y = [v[0],v[1]]
-    X_df = pd.DataFrame(X)
-    X_df.to_csv('X.csv', index=False, header=False)
-
-    y_df = pd.DataFrame(y)  
-    y_df.to_csv('y.csv', index=False, header=False)
-
-    print("Imagens vetorizadas e salvas em arquivos do tipo .csv")
-
-#save_load_faces_in_csv_file()
-#df = pd.read_csv('X.csv')
-#print(len(df.values.tolist()[0]))
-
-def return_of_image_vectors():
-    X = pd.read_csv('X.csv').values.tolist()
-    y = np.asarray(pd.read_csv('y.csv').values.tolist()).transpose()[0] #vetorizando a lista y
-
-    return [X,y]
-
-def return_last_index_subject():
-    last_index_subject = pd.read_csv('y.csv').values.tolist()[-1][0]
-
-    return last_index_subject
-
-#print(return_last_index_subject())
