@@ -9,8 +9,6 @@ from imageCapture import sample_capture_to_rank
 import subprocess
 
 #saudações
-#subprocess.call(["say","Olá, seja bem vindo ao sistema de reconhecimento facial do Centauro"])
-#subprocess.call(["say","Minha missão, pelo menos por enquanto, é tentar reconhecer você"])
 
 #inicializations
 dataset_faces = return_of_image_and_rotule_vectors()
@@ -87,7 +85,11 @@ def centroid_training():
 #Testar função -> nearest_centroid_training()
 #centroid_training()
 
-def knearest_rank_a_sample():
+def knearest_rank_a_sample(voice=False):
+	if voice:
+		subprocess.call(["say","Olá, seja bem vindo ao sistema de reconhecimento facial do Centauro"])
+		subprocess.call(["say","Minha missão, pelo menos por enquanto, é tentar reconhecer você"])
+
 	#take a picture for classification
 	sample_capture_to_rank()
 	
@@ -107,7 +109,11 @@ def knearest_rank_a_sample():
 #Testar função -> knearest_rank_a_sample()
 #knearest_rank_a_sample()
 
-def nearest_centroid_rank_a_sample():
+def nearest_centroid_rank_a_sample(voice=False):
+	if voice:
+		subprocess.call(["say","Olá, seja bem vindo ao sistema de reconhecimento facial do Centauro"])
+		subprocess.call(["say","Minha missão, pelo menos por enquanto, é tentar reconhecer você"])
+
 	#take a picture for classification
 	sample_capture_to_rank()
 	

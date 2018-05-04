@@ -6,6 +6,10 @@ import subprocess
 from loadFaces import vectorize_data_faces_cutting,vectorize_data_faces
 from detectFaces import detect_faces
 
+#inicializations
+haar_face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
+
+
 # Função para capturar apenas uma imagem, para que o programa a classifique
 def sample_capture_to_rank():
 	#subprocess.call(["say","Para reconhecer você, será necessário que você se posicione em frente a camêra"])
@@ -15,8 +19,7 @@ def sample_capture_to_rank():
 	cv2.namedWindow("image_capture",cv2.WINDOW_NORMAL)
 	cv2.resizeWindow('image_capture', 600,600)
 
-	print(">>> Pressione a tecla SPACE para capturar a imagem ou ESC para sair <<< ")
-	haar_face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
+	print(">>> Pressione a tecla SPACE para capturar a imagem ou ESC para sair <<<\n")
 	while True:
 		ret, frame = cam.read()
 		cv2.imshow('image_capture', frame)
@@ -34,10 +37,10 @@ def sample_capture_to_rank():
 			try:
 				faces_detected_img = detect_faces(haar_face_cascade, frame)
 				cv2.imwrite(img_name,cv2.cvtColor(faces_detected_img, cv2.COLOR_BGR2GRAY))
-				print('captura realizada com sucesso !')
+				print('Captura realizada com sucesso !\n')
 				break 
 			except:
-				print('A captura não foi possível, por favor se posicionar adequadamente em frente a câmera e apertar a tecla ESPAÇO quando estiver preparado ...')
+				print('A captura não foi possível, por favor se posicionar adequadamente em frente a câmera e apertar a tecla ESPAÇO quando estiver preparado ...\n')
 
 	cam.release()
 
@@ -46,17 +49,17 @@ def sample_capture_to_rank():
 #Testar função -> sample_capture_to_rank()
 #sample_capture_to_rank()
 
-def samples_capture_to_dataBase(subject_number):
+def samples_capture_to_dataBase(subject_number,npic):
 	cam=cv2.VideoCapture(0)
 	cv2.namedWindow("image_capture_for_database",cv2.WINDOW_NORMAL)
 	cv2.resizeWindow("image_capture_for_database",800,800)
 
-	print("Capturar cerca de 10 fotos para que componham o Banco de Dados,")
-	print("Basta utilizar a tecla ESPAÇO para que a captura seja possível realizar uma captura ...")
+	print("Capturar fotos para que componham o Banco de Dados,")
+	print("Basta utilizar a tecla ESPAÇO para que seja possível realizar uma captura ...\n")
 
-	subject_number+=1
+	#subject_number+=1
 	npictures=0
-	while npictures <10:
+	while npictures < npic:
 		ret,frame = cam.read()
 		cv2.imshow('image_capture_for_database',frame)
 		if not ret:
@@ -70,13 +73,16 @@ def samples_capture_to_dataBase(subject_number):
 		elif k%256 == 32:
 			#SPACE pressed
 			img_name = 'samples_faces_dataset/Subject_{}_type_{}.png'.format(subject_number,npictures+1)
+			img_name2 = 'backup_samples_faces_dataset/Subject_{}_type_{}.png'.format(subject_number,npictures+1)
+
 			try:
 				faces_detected_img = detect_faces(haar_face_cascade, frame)
 				cv2.imwrite(img_name,cv2.cvtColor(faces_detected_img, cv2.COLOR_BGR2GRAY))
-				print('{} salvo'.format(img_name))
+				cv2.imwrite(img_name2,cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY))
+				print('{} salvo\n'.format(img_name))
 				npictures+=1
 			except:
-				print('A captura não foi possível, por favor se posicionar adequadamente em frente a câmera e apertar a tecla ESPAÇO quando estiver preparado ...')
+				print('A captura não foi possível, por favor se posicionar adequadamente em frente a câmera e apertar a tecla ESPAÇO quando estiver preparado(a) ...\n')
 
 	cam.release()
 

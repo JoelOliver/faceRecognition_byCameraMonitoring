@@ -2,10 +2,10 @@ import numpy as np
 import cv2
 import pandas as pd
 
-def save_vectorized_load_faces_in_csv_file(v):
+def save_vectorized_load_faces_in_csv_file(vectors):
     #dataset_faces = vectorize_data_faces('samples_faces_dataset')
     #X, y = [dataset_faces[0], dataset_faces[1]]
-    X, y = [v[0],v[1]]
+    X, y = [vectors[0],vectors[1]]
     
     X_df = pd.DataFrame(X)
     X_df.to_csv('X.csv', index=False)

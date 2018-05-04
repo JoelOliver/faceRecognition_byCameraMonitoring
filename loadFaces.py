@@ -5,7 +5,7 @@ import pandas as pd
 from detectFaces import detect_faces
 
 # Inicializations
-D = 100 # Dimension to reshape images
+D = 300 # Dimension to reshape images
 
 def load_picture_captured():
     img_file = cv2.imread('sample_to_rank.png', 0)
@@ -64,7 +64,7 @@ def vectorize_data_faces(Filename,numberOfPersons):
         
         for j in range(Ni):   # Indice para expressoes
 
-            if i < 9:
+            if j < 10:
                 img_file = cv2.imread('{}/{}{}{}{}{}'.format(filename_str, str_1[0], i + 1, str_4, j + 1, str_3[1]),0)
                 #print('{}'.format(img_file))
                 #print(np.size(img_file))
