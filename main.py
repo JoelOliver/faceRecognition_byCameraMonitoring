@@ -20,7 +20,7 @@ from nearestNeighborsClassifier import knearest_rank_a_sample,nearest_centroid_r
 #knearest_rank_a_sample()
 
 # Classificar uma amostra utilizando o classificador centroid mais próximo
-#nearest_centroid_rank_a_sample()
+nearest_centroid_rank_a_sample()
 
 
 from imageCapture import sample_capture_to_rank,samples_capture_to_dataBase
@@ -32,4 +32,4 @@ from imageCapture import sample_capture_to_rank,samples_capture_to_dataBase
 from loadFaces import vectorize_data_faces
 from saveReturnValuesCSV import save_vectorized_load_faces_in_csv_file
 
-#save_vectorized_load_faces_in_csv_file(vectorize_data_faces('samples_faces_dataset',7))
+#save_vectorized_load_faces_in_csv_file(vectorize_data_faces('samples_faces_dataset',7))	

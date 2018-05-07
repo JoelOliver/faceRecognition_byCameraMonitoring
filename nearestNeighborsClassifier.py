@@ -103,7 +103,8 @@ def knearest_rank_a_sample(voice=False):
 	neighKNeigh.fit(X,y)
 	predict = neighKNeigh.predict(img)
 	
-	#subprocess.call(["say","Olá {}, espero ter acertado.".format(return_subject_name(predict))])
+	if voice:
+		subprocess.call(["say","Olá {}, espero ter acertado.".format(return_subject_name(predict))])
 	print("\nO Sistema prediz que você é : {}-{}\n".format(predict,return_subject_name(predict)))
 
 #Testar função -> knearest_rank_a_sample()
@@ -126,7 +127,9 @@ def nearest_centroid_rank_a_sample(voice=False):
 
 	neighCentroid.fit(X,y)
 	predict = neighCentroid.predict(img)
-	#subprocess.call(["say","Olá {}, espero ter acertado.".format(return_subject_name(predict)[0])])
+	
+	if voice:
+		subprocess.call(["say","Olá {}, espero ter acertado.".format(return_subject_name(predict)[0])])
 	print("\nO Sistema prediz que você é : {}-{}\n".format(predict,return_subject_name(predict)))
 
 #Testar função -> nearest_centroid_rank_a_sample()

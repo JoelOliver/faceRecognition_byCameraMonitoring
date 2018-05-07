@@ -27,6 +27,10 @@ def return_last_index_subject():
 
     return last_index_subject
 
+def return_all_subject_names():
+
+    return np.asarray(pd.read_csv('subjects_name.csv').values.tolist()).transpose()[0] 
+
 def return_subject_name(subject_number):
 
     return np.asarray(pd.read_csv('subjects_name.csv').values.tolist())[subject_number - 1][0]
