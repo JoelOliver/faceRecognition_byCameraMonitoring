@@ -4,9 +4,12 @@ import cv2
 
 import subprocess
 
-# Saudações do sistema
-#subprocess.call(["say","Olá, seja bem vindo ao sistema de reconhecimento facial do Centauro"])
-#subprocess.call(["say","Minha missão, pelo menos por enquanto, é tentar reconhecer você"])
+def welcome_by_system(voice=False):
+	if voice:
+		subprocess.call(["say","Olá, seja bem vindo ao sistema de reconhecimento facial do Centauro"])
+		subprocess.call(["say","Minha missão, pelo menos por enquanto, é tentar reconhecer você"])
+
+welcome_by_system(voice=True)
 
 from nearestNeighborsClassifier import knearest_neighborhood_training,centroid_training
 #Verificar taxas de acertos, treinamento e teste dos algorítmos
@@ -20,7 +23,7 @@ from nearestNeighborsClassifier import knearest_rank_a_sample,nearest_centroid_r
 #knearest_rank_a_sample()
 
 # Classificar uma amostra utilizando o classificador centroid mais próximo
-nearest_centroid_rank_a_sample()
+#nearest_centroid_rank_a_sample(voice=True)
 
 
 from imageCapture import sample_capture_to_rank,samples_capture_to_dataBase

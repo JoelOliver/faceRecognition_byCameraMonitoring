@@ -8,14 +8,24 @@ from sklearn.preprocessing import normalize
 from imageCapture import sample_capture_to_rank
 import subprocess
 
-#saudações
-
 #inicializations
 dataset_faces = return_of_image_and_rotule_vectors()
 X, y = [dataset_faces[0],dataset_faces[1]]
 
+#print(len(X[0]))
+
 #Normalization of X Matrix of image_vectors
-X = normalize(X)
+#X = normalize(X)
+
+#PCA - Test
+from sklearn.decomposition import PCA, IncrementalPCA
+#n_components = 9000
+#ipca = IncrementalPCA(n_components=n_components)
+#X = ipca.fit_transform(X)
+
+#pca = PCA(n_components=n_components)
+#X = pca.fit_transform(X)
+
 
 # para mudar valores dos parâmetros, verificar documentação do scikit-learn
 neighKNeigh = KNeighborsClassifier(n_neighbors=3)
@@ -27,7 +37,7 @@ def knearest_neighborhood_training():
 	hitsVector = []
 
 	while Nr != 100:
-		print("Rodada {}".format(Nr+1))
+		#print("Rodada {}".format(Nr+1))
 		X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 		neighKNeigh.fit(X_train, y_train)
 
@@ -59,7 +69,7 @@ def centroid_training():
 	hitsVector = []
 
 	while Nr!=100:
-		print("Rodada {}".format(Nr+1))
+		#print("Rodada {}".format(Nr+1))
 		X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 		neighCentroid.fit(X_train, y_train)
 
@@ -86,9 +96,6 @@ def centroid_training():
 #centroid_training()
 
 def knearest_rank_a_sample(voice=False):
-	if voice:
-		subprocess.call(["say","Olá, seja bem vindo ao sistema de reconhecimento facial do Centauro"])
-		subprocess.call(["say","Minha missão, pelo menos por enquanto, é tentar reconhecer você"])
 
 	#take a picture for classification
 	sample_capture_to_rank()
@@ -111,10 +118,7 @@ def knearest_rank_a_sample(voice=False):
 #knearest_rank_a_sample()
 
 def nearest_centroid_rank_a_sample(voice=False):
-	if voice:
-		subprocess.call(["say","Olá, seja bem vindo ao sistema de reconhecimento facial do Centauro"])
-		subprocess.call(["say","Minha missão, pelo menos por enquanto, é tentar reconhecer você"])
-
+	
 	#take a picture for classification
 	sample_capture_to_rank()
 	
@@ -123,7 +127,10 @@ def nearest_centroid_rank_a_sample(voice=False):
 	img = img.reshape(1,-1) # for convert in a single sample.
 	
 	# Normalizar imagem capturada e o dataset
-	img = normalize(img)
+	#img = normalize(img)
+
+	#Aplicar PCA - Testando ...
+	#img = pca.fit_transform(img)
 
 	neighCentroid.fit(X,y)
 	predict = neighCentroid.predict(img)

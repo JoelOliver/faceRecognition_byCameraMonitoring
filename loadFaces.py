@@ -5,7 +5,7 @@ import pandas as pd
 from detectFaces import detect_faces
 
 # Inicializations
-D = 300 # Dimension to reshape images
+D = 300 # Dimension to reshape images, when vectorize one vector -> len = 90000 (300x300)
 
 def load_picture_captured():
     img_file = cv2.imread('sample_to_rank.png', 0)

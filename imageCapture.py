@@ -22,7 +22,20 @@ def sample_capture_to_rank():
 	print(">>> Pressione a tecla SPACE para capturar a imagem ou ESC para sair <<<\n")
 	while True:
 		ret, frame = cam.read()
+		gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+		img_copy = frame.copy()          
+
+		gray = cv2.cvtColor(img_copy, cv2.COLOR_BGR2GRAY)
+    
+		faces = haar_face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5);          
+
+		# Draw a rectangle around the faces
+		for (x, y, w, h) in faces:
+		    cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 2)
+
 		cv2.imshow('image_capture', frame)
+		
 		if not ret:
 			break
 		k = cv2.waitKey(1)
