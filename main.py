@@ -9,7 +9,7 @@ def welcome_by_system(voice=False):
 		subprocess.call(["say","Olá, seja bem vindo ao sistema de reconhecimento facial do Centauro"])
 		subprocess.call(["say","Minha missão, pelo menos por enquanto, é tentar reconhecer você"])
 
-welcome_by_system(voice=True)
+welcome_by_system(voice=False)
 
 from nearestNeighborsClassifier import knearest_neighborhood_training,centroid_training
 #Verificar taxas de acertos, treinamento e teste dos algorítmos
@@ -29,7 +29,7 @@ from nearestNeighborsClassifier import knearest_rank_a_sample,nearest_centroid_r
 from imageCapture import sample_capture_to_rank,samples_capture_to_dataBase
 
 # Função para salvar novas imagens no Banco de Dados
-#samples_capture_to_dataBase(8,5)
+samples_capture_to_dataBase(8,20)
 
 
 from loadFaces import vectorize_data_faces

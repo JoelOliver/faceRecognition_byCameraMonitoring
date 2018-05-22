@@ -17,6 +17,11 @@ X, y = [dataset_faces[0],dataset_faces[1]]
 #Normalization of X Matrix of image_vectors
 #X = normalize(X)
 
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+scaler.fit(X)
+X = scaler.transform(X)
+
 #PCA - Test
 from sklearn.decomposition import PCA, IncrementalPCA
 #n_components = 9000
@@ -33,6 +38,16 @@ neighCentroid = NearestCentroid()
 
 def knearest_neighborhood_training():
 	print("\n>>>>> Rodadas de treinamento - Classificador KNearest Neighborhood <<<<<")
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+	
+	neighKNeigh.fit(X_train, y_train)
+
+	predictions = neighKNeigh.predict(X_test)
+
+	from sklearn.metrics import classification_report,confusion_matrix
+	print(classification_report(y_test,predictions))
+	
+	'''
 	Nr = 0
 	hitsVector = []
 
@@ -60,11 +75,23 @@ def knearest_neighborhood_training():
 	print("Minimo acerto :{} %".format(np.min(np.array(hitsVector))))
 	print("Maximo acerto :{} % \n".format(np.max(np.array(hitsVector))))
 
+	'''
+
 #Testar função -> nearest_knearest_neighborhood_training() 
 #knearest_neighborhood_training() 
 
 def centroid_training():
 	print("\n>>>>> Rodadas de treinamento - Classificador Nearest Centroid <<<<<")
+	X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+	
+	neighCentroid.fit(X_train, y_train)
+
+	predictions = neighCentroid.predict(X_test)
+
+	from sklearn.metrics import classification_report,confusion_matrix
+	print(classification_report(y_test,predictions))
+	
+	'''
 	Nr = 0
 	hitsVector = []
 
@@ -91,6 +118,7 @@ def centroid_training():
 	print("Media de acertos :{} %".format(np.mean(np.array(hitsVector))))
 	print("Minimo acerto :{} %".format(np.min(np.array(hitsVector))))
 	print("Maximo acerto :{} % \n".format(np.max(np.array(hitsVector))))
+	'''
 
 #Testar função -> nearest_centroid_training()
 #centroid_training()
